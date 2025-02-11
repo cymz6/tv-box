@@ -21,16 +21,10 @@ async function handleRequest(req: Request): Promise<Response> {
 
   try {
     let filePath = url.pathname;
-    let filename = url.pathname;
     
     // 如果请求根路径或 index.html，默认返回 index.html
     if (filePath === '/' || filePath === '/index.html') {
       filePath = '/index.html';
-    }
-
-
-    if (filename === '/' || filename === '/main.json') {
-      filename= '/main.json';
     }
 
     const userAgent = req.headers.get('User-Agent') || ''; // 获取用户代理
@@ -42,7 +36,7 @@ async function handleRequest(req: Request): Promise<Response> {
       userAgent.includes('okhttp/4.12') ||
       userAgent.includes('okhttp/4.50') // 处理特定的 okhttp 版本
     ) {
-      fullPath = `${Deno.cwd()}/interface${filename}`; // 对应接口路径
+      fullPath = `${Deno.cwd()}/interface${filePath}`; // 对应接口路径
     } else {
       fullPath = `${Deno.cwd()}/static${filePath}`; // 对应静态文件路径
     }
