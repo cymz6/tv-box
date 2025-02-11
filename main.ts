@@ -28,13 +28,16 @@ async function handleRequest(req: Request): Promise<Response> {
     const userAgent = req.headers.get('User-Agent') || '';
     let fullPath: string;
 
-    // User-Agent 的判断
-    if (
-      userAgent.includes('okhttp/3.15') ||
-      userAgent.includes('okhttp/4.12') ||
-      userAgent.includes('okhttp/4.50') 
-    ) {
-      fullPath = `${Deno.cwd()}/interface${filePath}`;
+    // 检查User-Agent并处理main.js的特殊情况
+    if (userAgent.includes('okhttp/3.15') || 
+        userAgent.includes('okhttp/4.12') || 
+        userAgent.includes('okhttp/4.50')) 
+    {
+      if (filePath === '/main.js') {
+        fullPath = `${Deno.cwd()}/interface${filePath}`;
+      } else {
+        fullPath = `${Deno.cwd()}/static${filePath}`;
+      }
     } else {
       fullPath = `${Deno.cwd()}/static${filePath}`;
     }
