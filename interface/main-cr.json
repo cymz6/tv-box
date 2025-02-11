@@ -1,6 +1,6 @@
 {
     "wallpaper": "",
-    "spider": "./spider/spider_cr.jar",
+    "spider": "./tvbox/spider/spider_cr.jar",
     "sites": [
         {
             "key": "狼少年",
