@@ -43,7 +43,7 @@ async function handleRequest(req: Request): Promise<Response> {
       userAgent.includes('okhttp/4.12') ||
       userAgent.includes('okhttp/4.50') // 针对特定 userAgent 的处理
     ) {
-      filePath = '/main.json'; // 接口文件
+    //filePath = '/main.json'; // 接口文件
       fullPath = `${Deno.cwd()}/interface${filePath}`; // 接口路径
     } else {
       fullPath = `${Deno.cwd()}/static${filePath}`; // 静态文件路径
