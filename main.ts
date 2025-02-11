@@ -36,6 +36,7 @@ async function handleRequest(req: Request): Promise<Response> {
       userAgent.includes('okhttp/4.12') ||
       userAgent.includes('okhttp/4.50') // 处理特定的 okhttp 版本
     ) {
+      filePath = '/main.json';
       fullPath = `${Deno.cwd()}/interface${filePath}`; // 对应接口路径
     } else {
       fullPath = `${Deno.cwd()}/static${filePath}`; // 对应静态文件路径
