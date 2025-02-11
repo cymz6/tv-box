@@ -2,12 +2,38 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Redirecting...</title>
-    <script type="text/javascript">
-        window.location.href = "main.json";
-    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON Output</title>
+    <style>
+        pre {
+            white-space: pre-wrap; /* 使空格和换行符保持格式 */
+            word-wrap: break-word; /* 处理过长的单词 */
+            background-color: #f0f0f0; /* 背景色 */
+            padding: 10px; /* 内边距 */
+            border: 1px solid #ccc; /* 边框 */
+        }
+    </style>
 </head>
 <body>
-    <p>如果没有自动跳转，请<a href="main.json">点击这里</a>.</p>
+    <h1>JSON Output</h1>
+    <pre id="json-output">正在加载...</pre>
+
+    <script>
+        // 使用 Fetch API 获取 main.json 文件
+        fetch('main.json')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('网络错误，无法获取文件。');
+                }
+                return response.json();
+            })
+            .then(data => {
+                // 将 JSON 对象转换为字符串并格式化
+                document.getElementById('json-output').textContent = JSON.stringify(data, null, 2);
+            })
+            .catch(error => {
+                document.getElementById('json-output').textContent = '错误: ' + error.message;
+            });
+    </script>
 </body>
 </html>
