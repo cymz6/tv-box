@@ -1,39 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JSON Output</title>
-    <style>
-        pre {
-            white-space: pre-wrap; /* 使空格和换行符保持格式 */
-            word-wrap: break-word; /* 处理过长的单词 */
-            background-color: #f0f0f0; /* 背景色 */
-            padding: 10px; /* 内边距 */
-            border: 1px solid #ccc; /* 边框 */
-        }
-    </style>
+    <title>自动下载 JSON 文件</title>
 </head>
 <body>
-    <h1>JSON Output</h1>
-    <pre id="json-output">正在加载...</pre>
-
+    <h1>正在下载 JSON 文件...</h1>
     <script>
-        // 使用 Fetch API 获取 main.json 文件
-        fetch('main.json')
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('网络错误，无法获取文件。');
-                }
-                return response.json();
-            })
-            .then(data => {
-                // 将 JSON 对象转换为字符串并格式化
-                document.getElementById('json-output').textContent = JSON.stringify(data, null, 2);
-            })
-            .catch(error => {
-                document.getElementById('json-output').textContent = '错误: ' + error.message;
-            });
+        // 创建一个链接并自动点击以下载文件
+        window.onload = function() {
+            const link = document.createElement('a');
+            link.href = 'main.json'; // 指向 JSON 文件
+            link.download = 'main.json'; // 文件下载时的名称
+            document.body.appendChild(link); // 将链接添加到文档中
+            link.click(); // 自动点击链接
+            document.body.removeChild(link); // 下载后移除链接
+        };
     </script>
 </body>
 </html>
