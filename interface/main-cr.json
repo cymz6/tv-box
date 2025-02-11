@@ -1,6 +1,6 @@
 {
     "wallpaper": "",
-    "spider": "./tvbox/spider/spider_cr.jar",
+    "spider": "https://tv-box.deno.dev/tvbox/spider/spider_cr.jar",
     "sites": [
         {
             "key": "狼少年",
