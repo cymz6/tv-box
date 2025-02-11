@@ -24,7 +24,20 @@ async function handleRequest(req: Request): Promise<Response> {
       filePath = '/index.html';
     }
 
-    const fullPath = `${Deno.cwd()}/static${filePath}`;
+    // 根据User-Agent判断文件路径
+    const userAgent = req.headers.get('User-Agent') || '';
+    let fullPath: string;
+
+    // User-Agent 的判断
+    if (
+      userAgent.includes('okhttp/3.15') ||
+      userAgent.includes('okhttp/4.12') ||
+      userAgent.includes('okhttp/4.50') 
+    ) {
+      fullPath = `${Deno.cwd()}/interface${filePath}`;
+    } else {
+      fullPath = `${Deno.cwd()}/static${filePath}`;
+    }
 
     const file = await Deno.readFile(fullPath);
     const contentType = getContentType(filePath);
